@@ -1,0 +1,52 @@
+server:
+  port: 9002
+spring:
+  application:
+    name: A
+  datasource:
+    url: jdbc:mysql://10.6.1.200:3306/channel_market?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&autoReconnect=true
+    username: admin
+    password: some_pass
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1
+      maximum-pool-size: 100
+      minimum-idle: 30
+      max-lifetime: 1800000
+      idle-timeout: 600000
+      connection-timeout: 30000
+      validation-timeout: 5000
+      pool-name: customer
+#    redis:
+#      host: redis0.alpha.com
+#      port: 6379
+#      database: 15
+#    rabbitmq:
+#      addresses: rb0.alpha.com
+#      port: 5672
+#      username: guest
+#      password: guest
+
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka
+logging:
+  level:
+    root: info
+
+xxl:
+  job:
+    accessToken: ''
+    address: ''
+    admin_addresses: http://127.0.0.1:9000/xxl-job-admin
+    appname: xxl-job-executor-A
+    ip: ''
+    logpath: /home/auntie/jobhandler
+    logretentiondays: 30
+    port: 9999

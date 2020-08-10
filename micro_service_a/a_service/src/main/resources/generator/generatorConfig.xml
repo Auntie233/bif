@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<!-- 使用 mvn mybatis-generator:generate -->
+<generatorConfiguration>
+    <!-- 配置文件 -->
+    <properties resource="generator/datasource.properties"/>
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="com.bif.db.mapper.SuperMapper"/>
+        </plugin>
+
+        <!-- 连接配置 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="${datasource.url}" userId="${datasource.db.username}"
+                        password="${datasource.db.password}">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="${model.package}" targetProject="src/main/java">
+            <property name="rootClass" value="com.bif.db.mapper.BaseEntity"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="${xml.path}" targetProject="src/main/resources"/>
+
+        <javaClientGenerator targetPackage="${mapper.package}" targetProject="src/main/java"
+                             type="XMLMAPPER"/>
+
+        <table tableName="data_wechat_bind">
+            <!--mysql 配置-->
+            <generatedKey column="bind_id" sqlStatement="Mysql" identity="true"/>
+            <!--oracle 配置-->
+            <!--<generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from dual" identity="false" type="pre"/>-->
+        </table>
+    </context>
+</generatorConfiguration>
